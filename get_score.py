@@ -30,7 +30,15 @@ def getMatchScoreURL(matchID):
     return url
 
 
+def getMatchTeams(matchURL):
+    try:
+        result = requests.get(matchURL)
+    except:
+        logAndExit()
 
+    matchData = r.json()
+    teams = {team.get("team_id"): team.get("team_name") for team in matchData.get("team")}
+    return teams
 
 
 
