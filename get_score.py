@@ -1,10 +1,14 @@
 import re
+import yaml
 import logging
 import requests
 
 from bs4 import BeautifulSoup
 
 from utility import logAndExit
+
+with open("config.yml", "r") as ymlfile:
+    conf = yaml.load(ymlfile)
 
 def getCurrentMatches(url):
     try:
@@ -26,7 +30,8 @@ def getMatchID(match, xml):
 
 
 def getMatchScoreURL(matchID):
-    url = "http://www.espncricinfo.com/ci/engine/match/" + matchID + ".json"
+    matchScoreBaseURL = str(conf.get("match_score_base_url"))
+    url = matchScoreBaseURL + matchID + ".json"
     return url
 
 
@@ -44,6 +49,8 @@ def getMatchTeams(matchURL):
 def getScore(matchURL, teams):
     matchStatusNotification = ""
     matchScoreNotification = ""
+    winStatus = str(conf.get("win_status"))
+
     try:
         result = requests.get(matchURL)
     except:
@@ -57,7 +64,7 @@ def getScore(matchURL, teams):
     if (not matchData.get("live").get("innings")):
         return (matchStatusNotification, matchScoreNotification)
 
-    if ("won by" in matchStatus):
+    if (winStatus in matchStatus):
         return (matchStatusNotification, matchScoreNotification)
 
     innings = matchData.get("live").get("innings")
