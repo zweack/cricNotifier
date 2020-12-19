@@ -36,9 +36,48 @@ def getMatchTeams(matchURL):
     except:
         logAndExit()
 
-    matchData = r.json()
+    matchData = result.json()
     teams = {team.get("team_id"): team.get("team_name") for team in matchData.get("team")}
     return teams
 
 
+def getScore(matchURL, teams):
+    matchStatusNotification = ""
+    matchScoreNotification = ""
+    try:
+        result = requests.get(matchURL)
+    except:
+        logAndExit()
 
+    matchData = result.json()
+
+    matchStatus = matchData.get("live").get("status")
+    matchStatusNotification = matchStatus
+
+    if (not matchData.get("live").get("innings")):
+        return (matchStatusNotification, matchScoreNotification)
+
+    if ("won by" in matchStatus):
+        return (matchStatusNotification, matchScoreNotification)
+
+    innings = matchData.get("live").get("innings")
+
+    battingTeamID = str(innings.get("batting_team_id"))
+    battingTeamName = teams[battingTeamID]
+
+    bowlingTeamID = str(innings.get("bowling_team_id"))
+    bowlingTeamName = teams[bowlingTeamID]
+
+    overs = innings.get("overs")
+    runs = innings.get("runs")
+    wickets = innings.get("wickets")
+    
+    try:
+        requiredRuns = matchData.get("comms")[1].get("required_string")
+    except IndexError:
+        requiredRuns = ""
+    
+    matchStatusNotification = battingTeamName + " vs " + bowlingTeamName
+    matchScoreNotification = "Score: " + str(runs) + "/" + str(wickets) + "\n" + "overs: " + str(overs) + "\n" + str(requiredRuns) + "\n" +str(matchStatus)
+  
+    return (matchStatusNotification, matchScoreNotification)
