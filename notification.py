@@ -11,6 +11,10 @@ def sendNotification(title, message):
         notification.notify(
             title=title,
             message=message,
+            app_name="cricNotifier",
+            timeout=50,
+            ticker="Latest Score",
+            toast=True,
             app_icon='icon/cricNotifier.' + ('ico' if platform == 'win' else 'png')
         )
     except Exception as e:
