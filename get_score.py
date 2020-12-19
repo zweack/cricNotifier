@@ -25,4 +25,12 @@ def getMatchID(match, xml):
     return matchID
 
 
+def getMatchScoreURL(matchID):
+    url = "http://www.espncricinfo.com/ci/engine/match/" + matchID + ".json"
+    return url
+
+
+
+
+
 
