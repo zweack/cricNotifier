@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from utility import logAndExit
 
 with open("config.yml", "r") as ymlfile:
-    conf = yaml.load(ymlfile)
+    conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
 def getCurrentMatches(url):
     try:
@@ -46,7 +46,7 @@ def getMatchTeams(matchURL):
     return teams
 
 
-def getScore(matchURL, teams):
+def getLastestScore(matchURL, teams):
     matchStatusNotification = ""
     matchScoreNotification = ""
     winStatus = str(conf.get("win_status"))
