@@ -1,10 +1,10 @@
 import logging
 from time import sleep
 import yaml
-import get_score as getScore
-import notification as notify
-from utility import logAndExit
-from ui import getUserInput
+import utils.get_score as getScore
+import utils.notification as notify
+from utils.utility import logAndExit
+from utils.ui import getUserInput
 
 logger = logging.getLogger("cricNotifier")
 

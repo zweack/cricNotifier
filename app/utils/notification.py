@@ -2,7 +2,7 @@ import logging
 from plyer.utils import platform
 from plyer import notification
 
-from utility import logAndExit
+from .tools import logAndExit
 
 logger = logging.getLogger('cricNotifier')
 

@@ -5,7 +5,7 @@ import requests
 
 from bs4 import BeautifulSoup
 
-from utility import logAndExit
+from .tools import logAndExit
 
 with open("conf/config.yml", "r") as ymlfile:
     conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
