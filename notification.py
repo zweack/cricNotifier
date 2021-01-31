@@ -4,7 +4,7 @@ from plyer import notification
 
 from utility import logAndExit
 
-logger = logging.getLogger('scorer.notification')
+logger = logging.getLogger('cricNotifier')
 
 def sendNotification(title, message):
     try:
@@ -12,9 +12,8 @@ def sendNotification(title, message):
             title=title,
             message=message,
             app_name="cricNotifier",
-            timeout=50,
-            ticker="Latest Score",
-            toast=True,
+            timeout=25,
+            toast=False,
             app_icon='icon/cricNotifier.' + ('ico' if platform == 'win' else 'png')
         )
     except Exception as e:
