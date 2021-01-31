@@ -5,7 +5,7 @@ import requests
 
 from bs4 import BeautifulSoup
 
-from app.utility import logAndExit
+from utility import logAndExit
 
 with open("conf/config.yml", "r") as ymlfile:
     conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
@@ -85,6 +85,6 @@ def getLastestScore(matchURL, teams):
         requiredRuns = ""
     
     matchStatusNotification = battingTeamName + " vs " + bowlingTeamName
-    matchScoreNotification = "Score: " + str(runs) + "/" + str(wickets) + "\n" + "overs: " + str(overs) + "\n" + str(requiredRuns) + "\n" +str(matchStatus)
+    matchScoreNotification = battingTeamName+ ": " + str(runs) + "/" + str(wickets) + "\n" + "overs: " + str(overs) + "\n" +str(matchStatus)
   
     return (matchStatusNotification, matchScoreNotification)
