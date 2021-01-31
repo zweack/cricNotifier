@@ -5,9 +5,9 @@ import requests
 
 from bs4 import BeautifulSoup
 
-from utility import logAndExit
+from app.utility import logAndExit
 
-with open("config.yml", "r") as ymlfile:
+with open("conf/config.yml", "r") as ymlfile:
     conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
 def getCurrentMatches(url):

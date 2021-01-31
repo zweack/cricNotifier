@@ -1,14 +1,14 @@
 import logging
 from time import sleep
 import yaml
-import get_score as getScore
-import notification as notify
-from utility import logAndExit
-from ui import getUserInput
+import app.get_score as getScore
+import app.notification as notify
+from app.utility import logAndExit
+from app.ui import getUserInput
 
 logger = logging.getLogger("cricNotifier")
 
-with open("config.yml", "r") as ymlfile:
+with open("conf/config.yml", "r") as ymlfile:
     conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
 
