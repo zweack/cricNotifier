@@ -3,7 +3,8 @@ from time import sleep
 import yaml
 import utils.get_score as getScore
 import utils.notification as notify
-from utils.utility import logAndExit
+from utils.tools import logAndExit
+
 from utils.ui import getUserInput
 
 logger = logging.getLogger("cricNotifier")
@@ -38,8 +39,6 @@ def main():
                 title, score = getScore.getLastestScore(jsonurl, playingTeams)
                 logger.debug("Sending notification for: title:{} score:\
                     {}".format(title, score))
-                #notify.popUpMessage(title, score)
-                #notification(score, title=title)
                 notify.sendNotification(title, score)
                 sleep(conf.get('sleep_interval'))
             except KeyboardInterrupt:
