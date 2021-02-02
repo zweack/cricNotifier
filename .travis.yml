@@ -2,24 +2,12 @@ language: python
 # linux
 dist: xenial
 python:
-  - 3.5
   - 3.6
   - 3.7
   - 3.8
 matrix:
   include:      
     # windows
-    - name: "Python 3.5.4 on Windows"
-      os: windows
-      language: shell
-      before_install:
-        - choco install python --version 3.5.4
-        - python --version
-        - python -m pip install --upgrade pip
-        - pip3 install --upgrade pytest
-        - pip3 install codecov
-        - pip3 install -r requirements/requirements_win.txt
-      env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
     - name: "Python 3.6.8 on Windows"
       os: windows
       language: shell
