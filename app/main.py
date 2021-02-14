@@ -1,16 +1,20 @@
 import logging
+import sys
 from time import sleep
 import yaml
 import utils.get_score as getScore
 import utils.notification as notify
 from utils.tools import logAndExit
+from utils.logs import setupLogging
 
 from utils.ui import getUserInput
 
-logger = logging.getLogger("cricNotifier")
-
 with open("conf/config.yml", "r") as ymlfile:
     conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
+
+
+setupLogging()
+logger = logging.getLogger(__name__)  
 
 
 def main():
@@ -38,8 +42,7 @@ def main():
         while True:
             try:
                 title, score = getScore.getLastestScore(jsonurl, playingTeams)
-                logger.debug("Sending notification for: title:{} score:\
-                    {}".format(title, score))
+                logger.info("Sending notification: {} \n{}".format(title, score))
                 notify.sendNotification(title, score, duration)
                 sleep(conf.get('sleep_interval'))
             except KeyboardInterrupt:
