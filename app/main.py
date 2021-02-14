@@ -34,12 +34,13 @@ def main():
         matchID = getScore.getMatchID(choice, xml)
         jsonurl = getScore.getMatchScoreURL(matchID)
         playingTeams = getScore.getMatchTeams(jsonurl)
+        duration = int(conf.get("notification_timeout"))
         while True:
             try:
                 title, score = getScore.getLastestScore(jsonurl, playingTeams)
                 logger.debug("Sending notification for: title:{} score:\
                     {}".format(title, score))
-                notify.sendNotification(title, score)
+                notify.sendNotification(title, score, duration)
                 sleep(conf.get('sleep_interval'))
             except KeyboardInterrupt:
                 break

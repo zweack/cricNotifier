@@ -1,6 +1,6 @@
 # user config
 sleep_interval: 60
-notification_timeout: 50
+notification_timeout: 10
 
 # application config
 win_status: "won by"
