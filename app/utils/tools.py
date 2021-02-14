@@ -1,7 +1,10 @@
 import sys
 import logging
+from .logs import setupLogging
 
-logger = logging.getLogger('cricNotifier')
+
+setupLogging()
+logger = logging.getLogger(__name__) 
 
 def logAndExit():
     logger.info("Exiting cricNotifier")

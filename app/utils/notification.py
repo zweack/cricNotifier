@@ -3,8 +3,11 @@ from plyer.utils import platform
 from plyer import notification
 
 from .tools import logAndExit
+from .logs import setupLogging
 
-logger = logging.getLogger('cricNotifier')
+
+setupLogging()
+logger = logging.getLogger(__name__) 
 
 def sendNotification(header, message, duration):
 

@@ -85,6 +85,6 @@ def getLastestScore(matchURL, teams):
         requiredRuns = ""
     
     matchStatusNotification = battingTeamName + " vs " + bowlingTeamName
-    matchScoreNotification = battingTeamName+ ": " + str(runs) + "/" + str(wickets) + "\n" + "overs: " + str(overs) + "\n" +str(matchStatus)
+    matchScoreNotification = battingTeamName+ ": " + str(runs) + "/" + str(wickets) + "\n" + "Overs: " + str(overs) + "\n" +str(matchStatus)
   
     return (matchStatusNotification, matchScoreNotification)
