@@ -5,3 +5,5 @@ A python application for real time cricket match notifications on Windows and Li
 ### Running on KDE Neon 5.20
 ![alt text](https://github.com/zweack/cricNotifier/blob/main/static/screenshots/linux.png?raw=true)
 
+### Running on Windows 10 20H2
+![alt text](https://github.com/zweack/cricNotifier/blob/main/static/screenshots/windows.png?raw=true)
