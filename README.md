@@ -12,6 +12,14 @@ A python application for real time cricket match notifications on Windows and Li
 ![alt text](https://github.com/zweack/cricNotifier/blob/main/static/screenshots/windows.png?raw=true)
 
 
+### Features
+- Rich command line UI
+- Choose among multiple live matches
+- Cross platform, works on Windows and Linux systems
+- Rich logging configuration
+- User defined notification timeout
+
+
 ### Installation 
 
 Make sure you have python 3 installed, you can install it from [here](https://www.python.org/downloads/ "here")
