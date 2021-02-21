@@ -1,7 +1,7 @@
 import pytest
 import logging
 
-from app.utils.get_score import getMatchID,getCurrentMatches
+from app.utils.scoreboard import getMatchID,getCurrentMatches
 
 from app.utils.logs import setupLogging
 
