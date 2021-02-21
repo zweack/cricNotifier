@@ -2,7 +2,7 @@ import logging
 import sys
 from time import sleep
 import yaml
-import utils.get_score as getScore
+import utils.scoreboard as scoreboard
 import utils.notification as notify
 from utils.tools import logAndExit
 from utils.logs import setupLogging
@@ -21,7 +21,7 @@ def main():
     while True:
         noMatches = str(conf.get("no_match_in_progress"))
         url = conf.get("xml_url")
-        matches, xml = getScore.getCurrentMatches(url)
+        matches, xml = scoreboard.getCurrentMatches(url)
         if matches[0] == noMatches:
             logAndExit()
 
@@ -35,13 +35,13 @@ def main():
         if choice == len(matches)-1:
             logAndExit()
 
-        matchID = getScore.getMatchID(choice, xml)
-        jsonurl = getScore.getMatchScoreURL(matchID)
-        playingTeams = getScore.getMatchTeams(jsonurl)
+        matchID = scoreboard.getMatchID(choice, xml)
+        jsonurl = scoreboard.getMatchScoreURL(matchID)
+        playingTeams = scoreboard.getMatchTeams(jsonurl)
         duration = int(conf.get("notification_timeout"))
         while True:
             try:
-                title, score = getScore.getLastestScore(jsonurl, playingTeams)
+                title, score = scoreboard.getLastestScore(jsonurl, playingTeams)
                 logger.info("Sending notification: {} \n{}".format(title, score))
                 notify.sendNotification(title, score, duration)
                 sleep(conf.get('sleep_interval'))
