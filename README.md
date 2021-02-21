@@ -13,30 +13,32 @@ A python application for real time cricket match notifications on Windows and Li
 
 
 ### Installation 
-------------
 
 Make sure you have python 3 installed, you can install it from [here](https://www.python.org/downloads/ "here")
+#### Clone the Repository
 
->For Windows:
 ```
-pip install -r requirements/requirements_win.txt`
+git clone https://github.com/zweack/cricNotifier.git && cd cricNotifier
 ```
 
->For Linux:
+#### For Windows:
 ```
-pip install -r requirements/requirements_other.txt`
+pip install -r requirements/requirements_win.txt
+```
+
+#### For Linux:
+```
+pip install -r requirements/requirements_other.txt
 ```
 
 ### Running the Application 
 
-------------
-
->For Windows:
+#### For Windows:
 ```
 python app/main.py
 ```
 
->For Linux:
+#### For Linux:
 ```
 python3 app/main.py
 ```
