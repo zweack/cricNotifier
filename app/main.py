@@ -2,18 +2,21 @@ import logging
 import sys
 from time import sleep
 import yaml
-import utils.scoreboard as scoreboard
-import utils.notification as notify
-from utils.tools import logAndExit
-from utils.logs import setupLogging
+import importlib
 
-from utils.ui import getUserInput
+
+tools = importlib.import_module('utils.tools')
+logs = importlib.import_module('utils.logs')
+scoreboard = importlib.import_module('utils.scoreboard')
+interface = importlib.import_module('utils.interface')
+notify = importlib.import_module('utils.notification')
+
 
 with open("conf/config.yml", "r") as ymlfile:
     conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
 
-setupLogging()
+logs.setupLogging()
 logger = logging.getLogger(__name__)  
 
 
@@ -23,17 +26,17 @@ def main():
         url = conf.get("xml_url")
         matches, xml = scoreboard.getCurrentMatches(url)
         if matches[0] == noMatches:
-            logAndExit()
+            tools.exitApp()
 
         matches.append("Quit")
 
         try:
-            choice = getUserInput(matches)
+            choice = interface.getUserInput(matches)
         except KeyboardInterrupt:
-            logAndExit()
+            tools.exitApp()
 
         if choice == len(matches)-1:
-            logAndExit()
+            tools.exitApp()
 
         matchID = scoreboard.getMatchID(choice, xml)
         jsonurl = scoreboard.getMatchScoreURL(matchID)
