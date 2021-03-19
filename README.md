@@ -18,6 +18,7 @@ A python application for real time cricket match notifications on Windows and Li
 - Cross platform, works on Windows and Linux systems
 - Rich logging configuration
 - User defined notification timeout
+- Popular tweets related to selected match [coming soon]
 
 
 ### Installation 
@@ -52,4 +53,7 @@ python3 app/main.py
 ```
 
 ### Logging Configuration
+Coming soon!
+
+### Match Tweets
 Coming soon!
