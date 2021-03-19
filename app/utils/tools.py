@@ -6,7 +6,7 @@ from .logs import setupLogging
 setupLogging()
 logger = logging.getLogger(__name__) 
 
-def logAndExit():
+def exitApp():
     logger.info("Exiting cricNotifier")
     print("Thanks for using cricNotifier")
     sys.exit()

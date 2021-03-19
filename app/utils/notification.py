@@ -2,7 +2,7 @@ import logging
 from plyer.utils import platform
 from plyer import notification
 
-from .tools import logAndExit
+from .tools import exitApp
 from .logs import setupLogging
 
 
@@ -23,7 +23,7 @@ def sendNotification(header, message, duration):
                 threaded=True
             )
         except Exception as e:
-            logAndExit()
+            exitApp()
     else:
         try:
             notification.notify(
@@ -35,4 +35,4 @@ def sendNotification(header, message, duration):
                 app_icon='static/icon/cricNotifier.png'
             )
         except Exception as e:
-            logAndExit()
+            exitApp()

@@ -5,7 +5,7 @@ import requests
 
 from bs4 import BeautifulSoup
 
-from .tools import logAndExit
+from .tools import exitApp
 
 with open("conf/config.yml", "r") as ymlfile:
     conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
@@ -14,7 +14,7 @@ def getCurrentMatches(url):
     try:
         result = requests.get(url)
     except:
-        logAndExit()
+        exitApp()
 
     soup = BeautifulSoup(result.text, "lxml")
     xml = soup.find_all("item")
@@ -39,7 +39,7 @@ def getMatchTeams(matchURL):
     try:
         result = requests.get(matchURL)
     except:
-        logAndExit()
+        exitApp()
 
     matchData = result.json()
     teams = {team.get("team_id"): team.get("team_name") for team in matchData.get("team")}
@@ -54,7 +54,7 @@ def getLastestScore(matchURL, teams):
     try:
         result = requests.get(matchURL)
     except:
-        logAndExit()
+        exitApp()
 
     matchData = result.json()
 
