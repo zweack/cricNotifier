@@ -5,11 +5,11 @@ import yaml
 import importlib
 
 
-tools = importlib.import_module('utils.tools')
-logs = importlib.import_module('utils.logs')
-scoreboard = importlib.import_module('utils.scoreboard')
-interface = importlib.import_module('utils.interface')
-notify = importlib.import_module('utils.notification')
+tools = importlib.import_module('app.utils.tools')
+logs = importlib.import_module('app.utils.logs')
+scoreboard = importlib.import_module('app.utils.scoreboard')
+interface = importlib.import_module('app.utils.interface')
+notify = importlib.import_module('app.utils.notification')
 
 
 with open("conf/config.yml", "r") as ymlfile:
