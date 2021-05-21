@@ -2,17 +2,17 @@
 
 A python application for real time cricket match notifications on Windows and Linux
 
-### Menu for available matches
+## Menu for available matches
 ![alt text](https://github.com/zweack/cricNotifier/blob/main/static/screenshots/menu.png?raw=true)
 
-### Notifications on KDE Neon 5.20
+## Notifications on KDE Neon 5.20
 ![alt text](https://github.com/zweack/cricNotifier/blob/main/static/screenshots/linux.png?raw=true)
 
-### Notifications on Windows 10 20H2
+## Notifications on Windows 10 20H2
 ![alt text](https://github.com/zweack/cricNotifier/blob/main/static/screenshots/windows.png?raw=true)
 
 
-### Features
+## Features
 - Rich command line UI
 - Choose among multiple live matches
 - Cross platform, works on Windows and Linux systems
@@ -21,9 +21,15 @@ A python application for real time cricket match notifications on Windows and Li
 - Popular tweets related to selected match [coming soon]
 
 
-### Installation 
+## Installation 
 
-Make sure you have python 3 installed, you can install it from [here](https://www.python.org/downloads/ "here")
+Make sure you have python > 3.5 and pip installed, you can install it from [here](https://www.python.org/downloads/ "here")
+
+### Install using pip
+```
+pip3 install cricNotifier
+```
+### Build and Install
 #### Clone the Repository
 
 ```
@@ -34,7 +40,7 @@ git clone https://github.com/zweack/cricNotifier.git && cd cricNotifier
 ```
 pip install -r requirements/requirements_win.txt
 ```
-Or install the package
+Install the package
 ```
 python setup.py install
 ```
@@ -43,25 +49,14 @@ python setup.py install
 ```
 pip install -r requirements/requirements_other.txt
 ```
-Or install the package
+Install the package
 ```
 sudo python3 setup.py install
 ```
 
-### Running the Application 
+## Running the Application 
 
-Run the application directly
-
-#### For Windows:
-```
-python app/main.py
-```
-
-#### For Linux:
-```
-python3 app/main.py
-```
-Or run below command if you have installed it as package
+Run following command on your terminal
 ```
 cricNotifier
 ```
