@@ -7,4 +7,3 @@ lxml==4.6.2
 windows-curses==2.2.0
 win10toast==0.9
 coloredlogs==15.0
-dbus-python==1.2.16
