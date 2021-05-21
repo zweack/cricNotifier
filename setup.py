@@ -7,7 +7,7 @@ def readme():
 
 setuptools.setup(
     name='cricNotifier',
-    version="1.0.2",
+    version="1.0.3",
     description='Cross platform cricket score notifications',
     long_description=readme(),
     long_description_content_type='text/markdown',
