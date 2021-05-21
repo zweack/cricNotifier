@@ -34,13 +34,23 @@ git clone https://github.com/zweack/cricNotifier.git && cd cricNotifier
 ```
 pip install -r requirements/requirements_win.txt
 ```
+Or install the package
+```
+python setup.py install
+```
 
 #### For Linux:
 ```
 pip install -r requirements/requirements_other.txt
 ```
+Or install the package
+```
+sudo python3 setup.py install
+```
 
 ### Running the Application 
+
+Run the application directly
 
 #### For Windows:
 ```
@@ -50,6 +60,10 @@ python app/main.py
 #### For Linux:
 ```
 python3 app/main.py
+```
+Or run below command if you have installed it as package
+```
+cricNotifier
 ```
 
 ### Logging Configuration
