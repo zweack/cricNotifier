@@ -1,4 +1,4 @@
-# cricNotifier ![version](https://img.shields.io/badge/version-1.0.0.0-brightgreen.svg) [![Build Status](https://travis-ci.org/zweack/cricNotifier.svg?branch=main)](https://travis-ci.org/zweack/cricNotifier)
+# cricNotifier ![GitHub release (latest by date)](https://img.shields.io/github/v/release/zweack/cricNotifier?style=flat-square) ![GitHub](https://img.shields.io/github/license/zweack/cricNotifier?style=flat-square) ![GitHub last commit](https://img.shields.io/github/last-commit/zweack/cricNotifier?style=flat-square) ![GitHub issues](https://img.shields.io/github/issues/zweack/cricNotifier?style=flat-square) [![Build Status](https://travis-ci.org/zweack/cricNotifier.svg?branch=main)](https://travis-ci.org/zweack/cricNotifier)
 
 A python application for real time cricket match notifications on Windows and Linux
 
