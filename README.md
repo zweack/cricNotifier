@@ -25,6 +25,10 @@ A python application for real time cricket match notifications on Windows and Li
 
 Make sure you have python > 3.5 and pip installed, you can install it from [here](https://www.python.org/downloads/ "here")
 
+For Linux systems, install dependencies for dbus-python as per specifications from your distro, e.g. for Ubuntu based distros, install following:
+```
+sudo apt-get -y install libglib2.0-dev libdbus-1-3 libdbus-1-dev
+```
 ### Install using pip
 ```
 pip3 install cricNotifier
