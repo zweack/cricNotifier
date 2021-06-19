@@ -4,8 +4,9 @@ import logging.config
 import logging
 import coloredlogs
 
-def setupLogging(default_path='conf/logs.yml', default_level=logging.INFO, env_key='LOG_CFG'):
 
+def setupLogging(default_path='conf/logs.yml', default_level=logging.INFO, env_key='LOG_CFG'):
+    """Setup rich logging."""
     path = default_path
     value = os.getenv(env_key, None)
     if value:
