@@ -6,12 +6,14 @@ from .logs import setupLogging
 
 
 setupLogging()
-logger = logging.getLogger(__name__) 
+logger = logging.getLogger(__name__)
 
 
 def printMatches(stdscr, matches, selected):
+    """Print list of available matches in last 24 hours."""
     stdscr.clear()
-    stdscr.addstr(0, 0, "The following matches are available now\n", curses.color_pair(1))
+    stdscr.addstr(0, 0, "The following matches are available now\n",
+                  curses.color_pair(1))
     for index, game in enumerate(matches):
         if index != selected:
             stdscr.addstr(index+1, 10, game, curses.color_pair(0))
@@ -44,5 +46,6 @@ def main(stdscr, matches):
 
 
 def getUserInput(matches):
+    """Get user input for match."""
     selected = wrapper(main, matches)
     return selected

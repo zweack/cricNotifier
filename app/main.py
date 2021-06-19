@@ -17,7 +17,7 @@ with open("conf/config.yml", "r") as ymlfile:
 
 
 logs.setupLogging()
-logger = logging.getLogger(__name__)  
+logger = logging.getLogger(__name__)
 
 
 def main():
@@ -44,8 +44,10 @@ def main():
         duration = int(conf.get("notification_timeout"))
         while True:
             try:
-                title, score = scoreboard.getLastestScore(jsonurl, playingTeams)
-                logger.info("Sending notification: {} \n{}".format(title, score))
+                title, score = scoreboard.getLastestScore(
+                    jsonurl, playingTeams)
+                logger.info(
+                    "Sending notification: {} \n{}".format(title, score))
                 notify.sendNotification(title, score, duration)
                 sleep(conf.get('sleep_interval'))
             except KeyboardInterrupt:
