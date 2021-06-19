@@ -31,15 +31,12 @@ def main(stdscr, matches):
         printMatches(stdscr, matches, selected)
         event = stdscr.getch()
         if event == ord("\n"):
-            logging.info("Enter key pressed")
             return selected
         elif event == curses.KEY_UP:
-            logging.info("Up key pressed")
             if selected != 0:
                 selected -= 1
                 printMatches(stdscr,  matches,  selected)
         elif event == curses.KEY_DOWN:
-            logging.info("Down key pressed")
             if selected != len(matches) - 1:
                 selected += 1
                 printMatches(stdscr, matches,  selected)
