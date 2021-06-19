@@ -3,13 +3,13 @@
 A python application for real time cricket match notifications on Windows and Linux
 
 ## Menu for available matches
-![alt text](https://github.com/zweack/cricNotifier/blob/main/static/screenshots/menu.png?raw=true)
+![alt text](https://github.com/zweack/cricNotifier/blob/dev/static/screenshots/menu.png?raw=true)
 
 ## Notifications on KDE Neon 5.20
-![alt text](https://github.com/zweack/cricNotifier/blob/main/static/screenshots/linux.png?raw=true)
+![alt text](https://github.com/zweack/cricNotifier/blob/dev/static/screenshots/linux.png?raw=true)
 
 ## Notifications on Windows 10 20H2
-![alt text](https://github.com/zweack/cricNotifier/blob/main/static/screenshots/windows.png?raw=true)
+![alt text](https://github.com/zweack/cricNotifier/blob/dev/static/screenshots/windows.png?raw=true)
 
 
 ## Features
