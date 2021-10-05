@@ -1,5 +1,6 @@
 import setuptools
 
+
 def readme():
     with open('README.md') as f:
         return f.read()
@@ -15,7 +16,8 @@ setuptools.setup(
     author='Jeet Jain',
     author_email='jeet88833@gmail.com',
     license='MIT',
-    packages=setuptools.find_packages(include=['app', 'app.*']),
+    packages=setuptools.find_packages(
+        include=['cricNotifier', 'utils', 'cricNotifier.*']),
     include_package_data=True,
     install_requires=[
         'requests',
@@ -27,7 +29,7 @@ setuptools.setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'cricNotifier = app.main:main'
+            'cricNotifier = cricNotifier.main:main'
         ]
     }
 )

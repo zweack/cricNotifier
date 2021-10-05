@@ -1,0 +1,10 @@
+requests==2.22.0
+pytest==6.2.2
+plyer==2.0.0
+beautifulsoup4==4.9.3
+PyYAML==5.4.1
+lxml==4.6.2
+coloredlogs==15.0
+dbus-python==1.2.16; sys_platform == "linux"
+windows-curses==2.2.0; sys_platform == "Windows"
+win10toast==0.9; sys_platform == "Windows"

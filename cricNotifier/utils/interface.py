@@ -2,7 +2,7 @@ from curses import wrapper
 import curses
 import logging
 
-from .logs import setupLogging
+from utils.logs import setupLogging
 
 
 setupLogging()

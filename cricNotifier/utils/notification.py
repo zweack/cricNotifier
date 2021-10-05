@@ -2,17 +2,17 @@ import logging
 from plyer.utils import platform
 from plyer import notification
 
-from .tools import exitApp
-from .logs import setupLogging
+from utils.tools import shutdown
+from utils.logs import setupLogging
 
 
 setupLogging()
 logger = logging.getLogger(__name__)
 
 
-def sendNotification(header, message, duration):
+def send(header, message, duration):
     """Build and send cricket score notifications."""
-    if platform == 'win':
+    if platform == '22':
         from win10toast import ToastNotifier
         toastNotifier = ToastNotifier()
         try:
@@ -24,7 +24,7 @@ def sendNotification(header, message, duration):
                 threaded=True
             )
         except Exception as e:
-            exitApp()
+            shutdown()
     else:
         try:
             notification.notify(
@@ -36,4 +36,4 @@ def sendNotification(header, message, duration):
                 app_icon='static/icon/cricNotifier.png'
             )
         except Exception as e:
-            exitApp()
+            shutdown()

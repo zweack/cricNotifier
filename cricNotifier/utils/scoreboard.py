@@ -5,10 +5,10 @@ import requests
 
 from bs4 import BeautifulSoup
 
-from .tools import exitApp
-from .logs import setupLogging
+from utils.tools import shutdown
+from utils.logs import setupLogging
 
-with open("conf/config.yml", "r") as ymlfile:
+with open("cricNotifier/conf/config.yml", "r") as ymlfile:
     conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
 setupLogging()
@@ -20,7 +20,7 @@ def getCurrentMatches(url):
     try:
         result = requests.get(url)
     except:
-        exitApp()
+        shutdown()
 
     soup = BeautifulSoup(result.text, "lxml")
     xml = soup.find_all("item")
@@ -49,7 +49,7 @@ def getMatchTeams(matchURL):
     try:
         result = requests.get(matchURL)
     except:
-        exitApp()
+        shutdown()
 
     matchData = result.json()
     teams = {team.get("team_id"): team.get("team_name")
@@ -66,7 +66,7 @@ def getLastestScore(matchURL, teams):
     try:
         result = requests.get(matchURL)
     except:
-        exitApp()
+        shutdown()
 
     matchData = result.json()
 

@@ -1,23 +1,44 @@
 import logging
-import sys
 from time import sleep
+import sys
+import os
 import yaml
-import importlib
+from plyer.utils import platform
+from plyer import notification
 
+from cricNotifier.utils import logs, scoreboard, interface
 
-tools = importlib.import_module('app.utils.tools')
-logs = importlib.import_module('app.utils.logs')
-scoreboard = importlib.import_module('app.utils.scoreboard')
-interface = importlib.import_module('app.utils.interface')
-notify = importlib.import_module('app.utils.notification')
-
-
-with open("conf/config.yml", "r") as ymlfile:
+with open("cricNotifier/conf/config.yml", "r") as ymlfile:
     conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
 
 logs.setupLogging()
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("cricNotifier")
+
+
+def sendNotification(header, message, duration):
+    """Build and send cricket score notifications."""
+    iconExt = '.ico' if platform == 'win' else '.png'
+    iconPath = os.path.join(os.getcwd(), 'cricNotifier',
+                            'static', 'icon', 'cricNotifier') + iconExt
+    try:
+        notification.notify(
+            title=header,
+            message=message,
+            app_name="cricNotifier",
+            timeout=duration,
+            toast=False,
+            app_icon=iconPath
+        )
+    except:
+        shutdown()
+
+
+def shutdown():
+    """Print exit message and close the app."""
+    logger.info("Exiting cricNotifier")
+    print("Thanks for using cricNotifier")
+    sys.exit()
 
 
 def main():
@@ -26,17 +47,17 @@ def main():
         url = conf.get("xml_url")
         matches, xml = scoreboard.getCurrentMatches(url)
         if matches[0] == noMatches:
-            tools.exitApp()
+            shutdown()
 
         matches.append("Quit")
 
         try:
             choice = interface.getUserInput(matches)
         except KeyboardInterrupt:
-            tools.exitApp()
+            shutdown()
 
         if choice == len(matches)-1:
-            tools.exitApp()
+            shutdown()
 
         matchID = scoreboard.getMatchID(choice, xml)
         jsonurl = scoreboard.getMatchScoreURL(matchID)
@@ -48,7 +69,7 @@ def main():
                     jsonurl, playingTeams)
                 logger.info(
                     "Sending notification: {} \n{}".format(title, score))
-                notify.sendNotification(title, score, duration)
+                sendNotification(title, score, duration)
                 sleep(conf.get('sleep_interval'))
             except KeyboardInterrupt:
                 break
