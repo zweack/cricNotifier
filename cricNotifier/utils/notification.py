@@ -25,5 +25,6 @@ def send(header, message, duration):
             toast=False,
             app_icon=iconPath
         )
-    except:
+    except Exception as e:
+        logger.exception(e)
         shutdown()
