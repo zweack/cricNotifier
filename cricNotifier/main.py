@@ -1,15 +1,10 @@
 import logging
 from time import sleep
-import yaml
 from cricNotifier.utils import logs, scoreboard, interface, notification
-from cricNotifier.utils.tools import shutdown
+from cricNotifier.utils.tools import loadConf, shutdown
 
-with open("cricNotifier/conf/config.yml", "r") as ymlfile:
-    conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
-
-
-logs.setupLogging()
-logger = logging.getLogger("cricNotifier")
+conf = loadConf()
+logger = logs.setupLogging(logging.INFO)
 
 
 def main():
@@ -18,6 +13,7 @@ def main():
         url = conf.get("xml_url")
         matches, xml = scoreboard.getCurrentMatches(url)
         if matches[0] == noMatches:
+            logger.info("No live matches available. Exiting...")
             shutdown()
 
         matches.append("Quit")
@@ -25,6 +21,7 @@ def main():
         try:
             choice = interface.getUserInput(matches)
         except KeyboardInterrupt:
+            logger.debug("Keyboard interruption detected.")
             shutdown()
 
         if choice == len(matches)-1:
@@ -40,9 +37,10 @@ def main():
                     jsonurl, playingTeams)
                 logger.info(
                     "Sending notification: {} \n{}".format(title, score))
-                notification.send(title, score, duration)
+                notification.send(str(title), str(score), duration)
                 sleep(conf.get('sleep_interval'))
             except KeyboardInterrupt:
+                logger.debug("Keyboard interruption detected.")
                 break
 
 

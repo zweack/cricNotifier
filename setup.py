@@ -24,7 +24,11 @@ setuptools.setup(
         'beautifulsoup4',
         'plyer',
         'PyYAML',
-        'lxml'
+        'lxml',
+        'coloredlogs',
+        'dbus-python; sys_platform == "linux"',
+        'windows-curses; sys_platform == "Windows"',
+        'win10toast; sys_platform == "Windows"'
     ],
     tests_require=['pytest'],
     entry_points={
