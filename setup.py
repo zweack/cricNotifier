@@ -1,5 +1,6 @@
 import setuptools
 
+
 def readme():
     with open('README.md') as f:
         return f.read()
@@ -7,7 +8,7 @@ def readme():
 
 setuptools.setup(
     name='cricNotifier',
-    version="1.0.3",
+    version="2.0.0",
     description='Cross platform cricket score notifications',
     long_description=readme(),
     long_description_content_type='text/markdown',
@@ -15,7 +16,8 @@ setuptools.setup(
     author='Jeet Jain',
     author_email='jeet88833@gmail.com',
     license='MIT',
-    packages=setuptools.find_packages(include=['app', 'app.*']),
+    packages=setuptools.find_packages(
+        include=['cricNotifier', 'utils', 'cricNotifier.*']),
     include_package_data=True,
     install_requires=[
         'requests',
@@ -27,7 +29,7 @@ setuptools.setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'cricNotifier = app.main:main'
+            'cricNotifier = cricNotifier.main:main'
         ]
     }
 )
