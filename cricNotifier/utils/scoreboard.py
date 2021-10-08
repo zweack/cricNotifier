@@ -5,8 +5,8 @@ import requests
 
 from bs4 import BeautifulSoup
 
-from utils.tools import shutdown
-from utils.logs import setupLogging
+from cricNotifier.utils.tools import shutdown
+from cricNotifier.utils.logs import setupLogging
 
 with open("cricNotifier/conf/config.yml", "r") as ymlfile:
     conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
@@ -19,7 +19,8 @@ def getCurrentMatches(url):
     """Get list of live matches in past 24 hours."""
     try:
         result = requests.get(url)
-    except:
+    except Exception as e:
+        logger.exception(e)
         shutdown()
 
     soup = BeautifulSoup(result.text, "lxml")
@@ -48,7 +49,8 @@ def getMatchTeams(matchURL):
     """Get playing teams."""
     try:
         result = requests.get(matchURL)
-    except:
+    except Exception as e:
+        logger.exception(e)
         shutdown()
 
     matchData = result.json()
@@ -65,7 +67,8 @@ def getLastestScore(matchURL, teams):
 
     try:
         result = requests.get(matchURL)
-    except:
+    except Exception as e:
+        logger.exception(e)
         shutdown()
 
     matchData = result.json()
