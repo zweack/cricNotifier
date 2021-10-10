@@ -2,13 +2,14 @@
 
 A python application for real time cricket match notifications on Windows and Linux
 
-## Menu for available matches
+## Screenshots
+### Menu for available matches
 ![alt text](https://github.com/zweack/cricNotifier/blob/dev/cricNotifier/static/screenshots/menu.png?raw=true)
 
-## Notifications on KDE Neon
+### Notifications on KDE Neon
 ![alt text](https://github.com/zweack/cricNotifier/blob/dev/cricNotifier/static/screenshots/linux.png?raw=true)
 
-## Notifications on Windows 10
+### Notifications on Windows 10
 ![alt text](https://github.com/zweack/cricNotifier/blob/dev/cricNotifier/static/screenshots/windows.png?raw=true)
 
 
@@ -18,7 +19,6 @@ A python application for real time cricket match notifications on Windows and Li
 - Cross platform, works on Windows and Linux systems
 - Rich logging configuration
 - User defined notification timeout
-- Popular tweets related to selected match [coming soon]
 
 
 ## Installation 
@@ -43,18 +43,12 @@ git clone https://github.com/zweack/cricNotifier.git && cd cricNotifier
 #### For Windows:
 ```
 pip install -r requirements.txt
-```
-Install the package
-```
 python setup.py install
 ```
 
 #### For Linux:
 ```
 pip install -r requirements.txt
-```
-Install the package
-```
 sudo python3 setup.py install
 ```
 
@@ -64,9 +58,15 @@ Run following command on your terminal
 ```
 cricNotifier
 ```
+Optional arguments:
+```
+  -h, --help                show this help message and exit
+  -t, --timeout TIMEOUT     duration of system notification
+  -i, --interval INTERVAL   duration between each notification
+  -nl, --nologs             disable console logs
+````
+## Contributing
+This project welcomes contributions and suggestions. Please feel free to create a PR, report an issue or put up a feature request.
 
-### Logging Configuration
-Coming soon!
-
-### Match Tweets
-Coming soon!
+## License
+cricNotifier is licensed under the [MIT License](https://github.com/zweack/cricNotifier/blob/dev/LICENSE).

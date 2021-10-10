@@ -121,7 +121,10 @@ def getLastestScore(matchURL, teams):
     except AttributeError:
         logger.error("Unable to fetch target value or it does not exists")
 
-    matchStatusNotification = battingTeamName + " vs " + bowlingTeamName
+    if battingTeamName is None or bowlingTeamName is None:
+        matchStatusNotification = "Match Status"
+    else:
+        matchStatusNotification = battingTeamName + " vs " + bowlingTeamName
     matchScoreNotification = battingTeamName + ": " + \
         str(runs) + "/" + str(wickets) + "\n" + \
         "Overs: " + str(overs) + str(target) + "\n" + str(playerInfo) + \

@@ -1,6 +1,6 @@
 import logging
 from time import sleep
-from cricNotifier.utils import logs, scoreboard, interface, notification
+from cricNotifier.utils import logs, scoreboard, interface, notification, cli
 from cricNotifier.utils.tools import loadConf, shutdown
 
 conf = loadConf()
@@ -8,6 +8,19 @@ logger = logs.setupLogging(logging.INFO)
 
 
 def main():
+    args, _ = cli.parse_arguments()
+    timeout = None
+    interval = None
+    if args.timeout is not None:
+        timeout = int(args.timeout)
+    else:
+        timeout = int(conf.get("notification_timeout"))
+    if args.interval is not None:
+        interval = int(args.interval)
+    else:
+        interval = conf.get('sleep_interval')
+    if args.nologs is True:
+        logger.disabled = True
     while True:
         noMatches = str(conf.get("no_match_in_progress"))
         url = conf.get("xml_url")
@@ -30,19 +43,24 @@ def main():
         matchID = scoreboard.getMatchID(choice, xml)
         jsonurl = scoreboard.getMatchScoreURL(matchID)
         playingTeams = scoreboard.getMatchTeams(jsonurl)
-        duration = int(conf.get("notification_timeout"))
         while True:
             try:
                 title, score = scoreboard.getLastestScore(
                     jsonurl, playingTeams)
                 logger.info(
                     "Sending notification: {} \n{}".format(title, score))
-                notification.send(str(title), str(score), duration)
-                sleep(conf.get('sleep_interval'))
+                notification.send(str(title), str(score), timeout)
+                sleep(interval)
             except KeyboardInterrupt:
                 logger.debug("Keyboard interruption detected.")
                 break
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt as e:
+        print(f"\n\nWARNING: User aborted command. Partial data "
+              f"save/corruption might occur. It is advised to re-run the"
+              f"command. {e}")
+        shutdown()
