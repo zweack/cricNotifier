@@ -9,7 +9,7 @@ def loadConf():
     conf = {}
     try:
         with open("cricNotifier/conf/config.yml", "r") as ymlfile:
-            conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
+            conf = yaml.safe_load(ymlfile)
     except Exception as e:
         logger.error(f"Unable to load cricNotifier configuration due to {e}")
     return conf
