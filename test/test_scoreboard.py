@@ -1,9 +1,9 @@
 import pytest
 import logging
 
-from app.utils.scoreboard import getMatchID, getCurrentMatches
+from cricNotifier.utils.scoreboard import getMatchID, getCurrentMatches
 
-from app.utils.logs import setupLogging
+from cricNotifier.utils.logs import setupLogging
 
 setupLogging()
 logger = logging.getLogger(__name__)

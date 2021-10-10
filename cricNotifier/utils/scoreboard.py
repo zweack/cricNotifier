@@ -1,26 +1,21 @@
 import re
-import yaml
-import logging
 import requests
 
 from bs4 import BeautifulSoup
+from cricNotifier.utils.tools import loadConf, shutdown
+from cricNotifier.utils.logs import setupLogging
 
-from .tools import exitApp
-from .logs import setupLogging
-
-with open("conf/config.yml", "r") as ymlfile:
-    conf = yaml.load(ymlfile, Loader=yaml.FullLoader)
-
-setupLogging()
-logger = logging.getLogger(__name__)
+conf = loadConf()
+logger = setupLogging()
 
 
 def getCurrentMatches(url):
     """Get list of live matches in past 24 hours."""
     try:
         result = requests.get(url)
-    except:
-        exitApp()
+    except Exception as e:
+        logger.exception(e)
+        shutdown()
 
     soup = BeautifulSoup(result.text, "lxml")
     xml = soup.find_all("item")
@@ -48,8 +43,9 @@ def getMatchTeams(matchURL):
     """Get playing teams."""
     try:
         result = requests.get(matchURL)
-    except:
-        exitApp()
+    except Exception as e:
+        logger.error(f"Unable to get playing teams due to {e}")
+        shutdown()
 
     matchData = result.json()
     teams = {team.get("team_id"): team.get("team_name")
@@ -65,8 +61,9 @@ def getLastestScore(matchURL, teams):
 
     try:
         result = requests.get(matchURL)
-    except:
-        exitApp()
+    except Exception as e:
+        logger.error(f"Unable to get latest score due to {e}")
+        shutdown()
 
     matchData = result.json()
 
@@ -112,7 +109,7 @@ def getLastestScore(matchURL, teams):
             playerInfo = f"{player2} {player1}"
         playerInfo += "\n"
     except (IndexError, TypeError):
-        logger.info("Unable to get player info")
+        logger.error("Unable to get player info")
 
     try:
         targetVal = str(matchData.get('centre').get(
@@ -122,9 +119,12 @@ def getLastestScore(matchURL, teams):
         else:
             target = f" Target: {targetVal}"
     except AttributeError:
-        logger.info("Unable to fetch target value or it does not exists")
+        logger.error("Unable to fetch target value or it does not exists")
 
-    matchStatusNotification = battingTeamName + " vs " + bowlingTeamName
+    if battingTeamName is None or bowlingTeamName is None:
+        matchStatusNotification = "Match Status"
+    else:
+        matchStatusNotification = battingTeamName + " vs " + bowlingTeamName
     matchScoreNotification = battingTeamName + ": " + \
         str(runs) + "/" + str(wickets) + "\n" + \
         "Overs: " + str(overs) + str(target) + "\n" + str(playerInfo) + \

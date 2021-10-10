@@ -17,7 +17,7 @@ matrix:
         - python -m pip install --upgrade pip
         - pip3 install --upgrade pytest
         - pip3 install codecov
-        - pip3 install -r requirements/requirements_win.txt
+        - pip3 install -r requirements.txt
       env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
     - name: "Python 3.7.4 on Windows"
       os: windows
@@ -28,7 +28,7 @@ matrix:
         - python -m pip install --upgrade pip
         - pip3 install --upgrade pytest
         - pip3 install codecov
-        - pip3 install -r requirements/requirements_win.txt
+        - pip3 install -r requirements.txt
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 before_install:
   - python --version
@@ -37,7 +37,7 @@ before_install:
   - pip install codecov
   - sudo apt-get update
   - sudo apt-get -y install libglib2.0-dev libdbus-1-3 libdbus-1-dev
-  - pip install -r requirements/requirements_other.txt
+  - pip install -r requirements.txt
 script: pytest
 after_success:
   - codecov
