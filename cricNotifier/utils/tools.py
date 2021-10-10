@@ -1,10 +1,18 @@
 import sys
-import logging
+import yaml
 from cricNotifier.utils.logs import setupLogging
 
+logger = setupLogging()
 
-setupLogging()
-logger = logging.getLogger(__name__)
+
+def loadConf():
+    conf = {}
+    try:
+        with open("cricNotifier/conf/config.yml", "r") as ymlfile:
+            conf = yaml.safe_load(ymlfile)
+    except Exception as e:
+        logger.error(f"Unable to load cricNotifier configuration due to {e}")
+    return conf
 
 
 def shutdown():

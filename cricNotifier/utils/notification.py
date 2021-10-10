@@ -6,9 +6,7 @@ from plyer import notification
 from cricNotifier.utils.tools import shutdown
 from cricNotifier.utils.logs import setupLogging
 
-
-setupLogging()
-logger = logging.getLogger(__name__)
+logger = setupLogging()
 
 
 def send(header, message, duration):

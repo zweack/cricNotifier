@@ -1,12 +1,8 @@
-from curses import wrapper
 import curses
-import logging
-
+from curses import wrapper
 from cricNotifier.utils.logs import setupLogging
 
-
-setupLogging()
-logger = logging.getLogger(__name__)
+logger = setupLogging()
 
 
 def printMatches(stdscr, matches, selected):
