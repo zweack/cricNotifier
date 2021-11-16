@@ -4,6 +4,6 @@ notification_timeout: 10
 
 # application config
 win_status: "won by"
-match_score_base_url: "http://www.espncricinfo.com/ci/engine/match/"
+base_url: "http://www.espncricinfo.com/ci/engine/match/"
 xml_url: "http://static.cricinfo.com/rss/livescores.xml"
-no_match_in_progress: "No Match in progress"
+no_match: "No Match in progress"
