@@ -2,10 +2,10 @@ import re
 import requests
 
 from bs4 import BeautifulSoup
-from cricNotifier.utils.tools import loadConf, shutdown
+from cricNotifier.utils import constants as conf
+from cricNotifier.utils.tools import shutdown
 from cricNotifier.utils.logs import setupLogging
 
-conf = loadConf()
 logger = setupLogging()
 
 
@@ -34,7 +34,7 @@ def getMatchID(match, xml):
 
 def getMatchScoreURL(matchID):
     """Build match URL from match ID."""
-    matchScoreBaseURL = str(conf.get("match_score_base_url"))
+    matchScoreBaseURL = str(conf.base_url)
     url = matchScoreBaseURL + matchID + ".json"
     return url
 
@@ -57,7 +57,7 @@ def getLastestScore(matchURL, teams):
     """Get latest score of selected match."""
     matchStatusNotification = ""
     matchScoreNotification = ""
-    winStatus = str(conf.get("win_status"))
+    winStatus = str(conf.win_status)
 
     try:
         result = requests.get(matchURL)

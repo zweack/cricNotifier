@@ -1,9 +1,9 @@
 import logging
 from time import sleep
 from cricNotifier.utils import logs, scoreboard, interface, notification, cli
-from cricNotifier.utils.tools import loadConf, shutdown
+from cricNotifier.utils import constants as conf
+from cricNotifier.utils.tools import shutdown
 
-conf = loadConf()
 logger = logs.setupLogging(logging.INFO)
 
 
@@ -14,16 +14,16 @@ def main():
     if args.timeout is not None:
         timeout = int(args.timeout)
     else:
-        timeout = int(conf.get("notification_timeout"))
+        timeout = int(conf.notification_timeout)
     if args.interval is not None:
         interval = int(args.interval)
     else:
-        interval = conf.get('sleep_interval')
+        interval = int(conf.sleep_interval)
     if args.nologs is True:
         logger.disabled = True
     while True:
-        noMatches = str(conf.get("no_match_in_progress"))
-        url = conf.get("xml_url")
+        noMatches = str(conf.no_match)
+        url = conf.xml_url
         matches, xml = scoreboard.getCurrentMatches(url)
         if matches[0] == noMatches:
             logger.info("No live matches available. Exiting...")
