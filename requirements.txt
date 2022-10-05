@@ -4,7 +4,7 @@ plyer
 beautifulsoup4
 PyYAML
 lxml
-coloredlogs
 dbus-python; sys_platform == "linux"
-windows-curses; sys_platform == "Windows"
 win10toast; sys_platform == "Windows"
+typer[all]
+rich

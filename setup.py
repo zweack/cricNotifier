@@ -25,9 +25,9 @@ setuptools.setup(
         'plyer',
         'PyYAML',
         'lxml',
-        'coloredlogs',
+        'typer[all]',
+        'rich',
         'dbus-python; sys_platform == "linux"',
-        'windows-curses; sys_platform == "Windows"',
         'win10toast; sys_platform == "Windows"'
     ],
     tests_require=['pytest'],
