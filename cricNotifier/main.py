@@ -84,8 +84,9 @@ class Match:
 class Scoreboard(Match):
     def __init__(self, id) -> None:
         Match.__init__(self)
+        self.id = self.init_id(id)
         try:
-            guid = self.xml[id].guid.text
+            guid = self.xml[self.id].guid.text
         except IndexError:
             print("[bold red][Error][/bold red] Invalid match id!")
             exit(0)
@@ -99,6 +100,18 @@ class Scoreboard(Match):
             exit(0)
         self.data = res.json()
 
+    def init_id(self, id):
+        if id is None:
+            s = Store()
+            data = s.get()
+            if data == -1:
+                print(
+                    "[bold red][Error][/bold red] Match id unavailable, either select a match or pass an id.")
+                exit(0)
+            else:
+                id = data["id"]
+        return int(id) - 1
+
     def info(self):
         match = self.data.get("match")
         series = self.data.get("series")
@@ -111,11 +124,83 @@ class Scoreboard(Match):
         if match.get("toss_decision_name") != None and match.get("toss_decision_name") != None:
             match_info.append(["Toss", "{} won the toss and choose to {} first.".format(teams.get(
                 match.get("toss_winner_team_id")), match.get("toss_decision_name"))])
-
-        print(tabulate(match_info, tablefmt="simple_grid"))
+        print(tabulate(match_info, tablefmt="simple_grid",
+              maxcolwidths=[12, 60]))
 
     def score(self):
-        pass
+        teams = {team.get("team_id"): team.get("team_name")
+                 for team in self.data.get("team")}
+        score_str = ""
+        if self.data.get('match').get('live_state') == "":
+            match_status = self.data.get("live").get("status")
+        else:
+            match_status = self.data.get('match').get('live_state')
+        status_str = match_status
+
+        if (not self.data.get("live").get("innings")):
+            return (status_str, score_str)
+
+        if ("won by" in match_status):
+            return (status_str, score_str)
+
+        innings = self.data.get("live").get("innings")
+
+        batting_team_id = str(innings.get("batting_team_id"))
+        batting_team_name = teams[batting_team_id]
+
+        bowling_team_id = str(innings.get("bowling_team_id"))
+        bowling_team_name = teams[bowling_team_id]
+
+        overs = innings.get("overs")
+        runs = innings.get("runs")
+        wickets = innings.get("wickets")
+        players = ""
+        target = ""
+
+        if self.data.get("centre") is not None:
+            players_info = self.data.get("centre")
+        else:
+            players_info = self.data.get("comms")
+        try:
+            p1 = players_info.get("batting")[0]
+            p2 = players_info.get("batting")[1]
+            player1 = f"{p1.get('popular_name')} {p1.get('runs')}({p1.get('balls_faced')})"
+            player2 = f"{p2.get('popular_name')} {p2.get('runs')}({p2.get('balls_faced')})"
+            p1_on_strike = True if p1.get(
+                'live_current_name') == 'striker' else False
+
+            if p1_on_strike:
+                player1 += '*'
+                players = f"{player1} {player2}"
+            else:
+                player2 += '*'
+                players = f"{player2} {player1}"
+            players += "\n"
+        except (IndexError, TypeError):
+            print("[bold red][Error][/bold red] Unable to get player info.")
+
+        try:
+            tgt = str(self.data.get('centre').get(
+                'common').get('innings').get('target'))
+            if tgt == '0' or tgt == '':
+                target = ""
+            else:
+                target = f" Target: {tgt}"
+        except AttributeError:
+            print(
+                "[bold red][Error][/bold red] Unable to fetch target value or it does not exists")
+
+        if batting_team_name is None or bowling_team_name is None:
+            status_str = "Match Status"
+        else:
+            status_str = batting_team_name + " vs " + bowling_team_name
+        score_str = batting_team_name + ": " + \
+            str(runs) + "/" + str(wickets) + "\n" + \
+            "Overs: " + str(overs) + str(target) + "\n" + str(players) + \
+            str(match_status)
+
+        info = [[status_str], [score_str]]
+        print(tabulate(info, tablefmt="simple_grid"))
 
     def commentary(self, limit):
         count = 0
@@ -149,14 +234,16 @@ app = typer.Typer()
 
 @app.command("list")
 def list_matches(filter=None):
+    """
+    List all available matches.
+    """
     m = Match()
     matches = m.list(filter)
     options = []
     if len(matches) != 0:
         for i, match in enumerate(matches):
-            # print("{}. {}".format(i + 1, match))
-            options.append([i+1, match])
-        print(tabulate(options, tablefmt="simple_grid"))
+            options.append([i + 1, match])
+        print(tabulate(options, tablefmt="simple_grid", maxcolwidths=[6, 72]))
         print("\nUse select command to select a match.")
         print("e.g. for {}, use \ncric select {} ".format(
             matches[-1], len(matches)))
@@ -164,7 +251,10 @@ def list_matches(filter=None):
 
 @app.command("select")
 def select_match(id):
-    sb = Scoreboard(int(id) - 1)
+    """
+    Select a match with an ID.
+    """
+    sb = Scoreboard(id)
     selection = {
         "id": id
     }
@@ -181,22 +271,12 @@ def select_match(id):
 
 @app.command("score")
 def get_score(id=None, notify=None):
+    """
+    Fetch latest score for a match.
+    """
     status = ""
-    if id is None:
-        s = Store()
-        data = s.get()
-        if data == -1:
-            print(
-                "[bold red][Error][/bold red] Match id unavailable, either select a match or pass an id.")
-            return
-        else:
-            id = data["id"]
-    sb = Scoreboard(int(id) - 1)
-    if sb.data.get('match').get('live_state') == "":
-        status = sb.data.get("live").get("status")
-    else:
-        status = sb.data.get('match').get('live_state')
-    print(status)
+    sb = Scoreboard(id)
+    sb.score()
     if notify:
         n = Notification()
         n.send("Some Match", status, 10)
@@ -204,31 +284,19 @@ def get_score(id=None, notify=None):
 
 @app.command("info")
 def info(id=None):
-    if id is None:
-        s = Store()
-        data = s.get()
-        if data == -1:
-            print(
-                "[bold red][Error][/bold red] Match id unavailable, either select a match or pass an id.")
-            return
-        else:
-            id = data["id"]
-    sb = Scoreboard(int(id) - 1)
+    """
+    Fetch info for a match.
+    """
+    sb = Scoreboard(id)
     sb.info()
 
 
 @app.command("commentary")
 def get_commentary(id=None, limit=2, notify=None):
-    if id is None:
-        s = Store()
-        data = s.get()
-        if data == -1:
-            print(
-                "[bold red][Error][/bold red] Match id unavailable, either select a match or pass an id.")
-            return
-        else:
-            id = data["id"]
-    sb = Scoreboard(int(id) - 1)
+    """
+    Fetch commentary for last few overs.
+    """
+    sb = Scoreboard(id)
     sb.commentary(int(limit))
 
 

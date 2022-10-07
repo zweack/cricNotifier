@@ -2,23 +2,11 @@
 
 A python application for real time cricket match notifications on Windows and Linux
 
-## Screenshots
-### Menu for available matches
-![alt text](https://github.com/zweack/cricNotifier/blob/dev/cricNotifier/static/screenshots/menu.png?raw=true)
-
-### Notifications on KDE Neon
-![alt text](https://github.com/zweack/cricNotifier/blob/dev/cricNotifier/static/screenshots/linux.png?raw=true)
-
-### Notifications on Windows 10
-![alt text](https://github.com/zweack/cricNotifier/blob/dev/cricNotifier/static/screenshots/windows.png?raw=true)
-
 
 ## Features
 - Rich command line UI
 - Choose among multiple live matches
 - Cross platform, works on Windows and Linux systems
-- Rich logging configuration
-- User defined notification timeout
 
 
 ## Installation 
@@ -40,30 +28,24 @@ pip3 install cricNotifier
 git clone https://github.com/zweack/cricNotifier.git && cd cricNotifier
 ```
 
-#### For Windows:
+#### Install Dependencies
 ```
 pip install -r requirements.txt
-python setup.py install
-```
-
-#### For Linux:
-```
-pip install -r requirements.txt
-sudo python3 setup.py install
 ```
 
 ## Running the Application 
 
 Run following command on your terminal
 ```
-cricNotifier
+cricNotifier [argument]
 ```
-Optional arguments:
+Arguments:
 ```
-  -h, --help                show this help message and exit
-  -t, --timeout TIMEOUT     duration of system notification
-  -i, --interval INTERVAL   duration between each notification
-  -nl, --nologs             disable console logs
+commentary        Fetch commentary for last few overs.
+info              Fetch info for a match.
+list              List all available matches.
+score             Fetch latest score for a match.
+select            Select a match with an ID.
 ````
 ## Contributing
 This project welcomes contributions and suggestions. Please feel free to create a PR, report an issue or put up a feature request.
