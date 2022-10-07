@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "cricnotifier"
+version = "0.1.0"
+description = "A cli application for real time cricket match notifications."
+authors = ["Jeet Jain <jeet88833@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.scripts]
+cricnotifier = "cricnotifier.main:app"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+typer = {extras = ["all"], version = "^0.6.1"}
+requests = "*"
+pytest = "*"
+plyer = "*"
+beautifulsoup4 = "*"
+PyYAML = "*"
+lxml = "*"
+win10toast = "*"
+rich = "*"
+tabulate = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
