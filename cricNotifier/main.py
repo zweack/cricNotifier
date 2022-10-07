@@ -1,11 +1,12 @@
 import re
 import os
 import json
-import requests
 import typer
+import requests
+from rich import print
+from tabulate import tabulate
 from bs4 import BeautifulSoup
 from plyer import notification
-from rich import print
 
 
 class Store:
@@ -62,8 +63,10 @@ class Match:
         try:
             result = requests.get(
                 "http://static.cricinfo.com/rss/livescores.xml")
-        except Exception as e:
-            print("exiting...")
+        except Exception:
+            print(
+                "[bold red][Error][/bold red] Failed to initilize match instance, server not accessible!")
+            exit(0)
 
         soup = BeautifulSoup(result.text, "xml")
         xml = soup.find_all("item")
@@ -81,14 +84,19 @@ class Match:
 class Scoreboard(Match):
     def __init__(self, id) -> None:
         Match.__init__(self)
-        guid = self.xml[id].guid.text
+        try:
+            guid = self.xml[id].guid.text
+        except IndexError:
+            print("[bold red][Error][/bold red] Invalid match id!")
+            exit(0)
         m_id = re.search(r'\d+', guid).group()
         url = "http://www.espncricinfo.com/ci/engine/match/" + m_id + ".json"
         try:
             res = requests.get(url)
-        except Exception as e:
-            print("exiting...")
-            return
+        except Exception:
+            print(
+                "[bold red][Error][/bold red] Failed to initilize match instance, server not accessible!")
+            exit(0)
         self.data = res.json()
 
     def info(self):
@@ -96,33 +104,38 @@ class Scoreboard(Match):
         series = self.data.get("series")
         teams = {team.get("team_id"): team.get("team_name")
                  for team in self.data.get("team")}
-        print("Description:", self.data.get("description"))
-        print("Series     :", series[0].get("series_name"))
-        print("Venue      :", match.get("ground_name"))
+        match_info = [["Description", self.data.get("description")], ["Series", series[0].get(
+            "series_name")], ["Venue", match.get("ground_name")]]
         if match.get("current_summary") != "":
-            print("Summary    :", match.get("current_summary"))
-        if match.get("toss_decision_name") != "":
-            print("Toss       : {} won the toss and choose to {} first.".format(teams.get(
-                match.get("toss_winner_team_id")), match.get("toss_decision_name")))
+            match_info.append(["Summary", match.get("current_summary")])
+        if match.get("toss_decision_name") != None and match.get("toss_decision_name") != None:
+            match_info.append(["Toss", "{} won the toss and choose to {} first.".format(teams.get(
+                match.get("toss_winner_team_id")), match.get("toss_decision_name"))])
+
+        print(tabulate(match_info, tablefmt="simple_grid"))
 
     def score(self):
         pass
 
     def commentary(self, limit):
-        comms = self.data.get("comms")
         count = 0
-        for com in comms:
-            if count > limit:
-                break
-            info = com.get("ball")
-            if (info != ""):
-                count += 1
-                for i in info:
-                    print("[{}]: {}, {} ".format(i.get("overs_actual"),
-                          i.get("players"), i.get("event").upper()))
-                    if i.get("text") != "":
-                        text = BeautifulSoup(i.get("text"), "lxml").text
-                        print(text, "\n")
+        try:
+            comms = self.data.get("comms")
+            for com in comms:
+                if count > limit:
+                    break
+                info = com.get("ball")
+                if (info != ""):
+                    count += 1
+                    for i in info:
+                        print("[{}]: {}, {} ".format(i.get("overs_actual"),
+                                                     i.get("players"), i.get("event").upper()))
+                        if i.get("text") != "":
+                            text = BeautifulSoup(i.get("text"), "lxml").text
+                            text = text[0].upper() + text[1:] + "."
+                            print(text, "\n")
+        except Exception:
+            print("[bold red][Error][/bold red] Unable to fetch commentary!")
 
     def squad(self):
         pass
@@ -138,9 +151,12 @@ app = typer.Typer()
 def list_matches(filter=None):
     m = Match()
     matches = m.list(filter)
+    options = []
     if len(matches) != 0:
         for i, match in enumerate(matches):
-            print("{}. {}".format(i + 1, match))
+            # print("{}. {}".format(i + 1, match))
+            options.append([i+1, match])
+        print(tabulate(options, tablefmt="simple_grid"))
         print("\nUse select command to select a match.")
         print("e.g. for {}, use \ncric select {} ".format(
             matches[-1], len(matches)))
@@ -159,9 +175,8 @@ def select_match(id):
         print("[bold red][Error][/bold red] Unable to store selected match id, selection will not be preserved")
         return
 
-    teams = {team.get("team_id"): team.get("team_name")
-             for team in sb.data.get("team")}
-    print("[green][Info][/green] You have selected:", teams)
+    teams = [team.get("team_name") for team in sb.data.get("team")]
+    print("[green][Info][/green] You have selected: {} vs {}".format(teams[0], teams[1]))
 
 
 @app.command("score")

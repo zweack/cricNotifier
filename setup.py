@@ -33,7 +33,7 @@ setuptools.setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'cricNotifier = cricNotifier.main:main'
+            'cricNotifier = cricNotifier.main'
         ]
     }
 )

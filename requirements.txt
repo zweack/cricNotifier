@@ -8,3 +8,4 @@ dbus-python; sys_platform == "linux"
 win10toast; sys_platform == "Windows"
 typer[all]
 rich
+tabulate
