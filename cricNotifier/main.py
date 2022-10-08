@@ -154,18 +154,15 @@ class Scoreboard(Match):
         overs = innings.get("overs")
         runs = innings.get("runs")
         wickets = innings.get("wickets")
+        players_info = self.data.get("centre")
         players = ""
         target = ""
 
-        if self.data.get("centre") is not None:
-            players_info = self.data.get("centre")
-        else:
-            players_info = self.data.get("comms")
         try:
             p1 = players_info.get("batting")[0]
             p2 = players_info.get("batting")[1]
-            player1 = f"{p1.get('popular_name')} {p1.get('runs')}({p1.get('balls_faced')})"
-            player2 = f"{p2.get('popular_name')} {p2.get('runs')}({p2.get('balls_faced')})"
+            player1 = f"{p1.get('known_as')} {p1.get('runs')}({p1.get('balls_faced')})"
+            player2 = f"{p2.get('known_as')} {p2.get('runs')}({p2.get('balls_faced')})"
             p1_on_strike = True if p1.get(
                 'live_current_name') == 'striker' else False
 
@@ -223,7 +220,31 @@ class Scoreboard(Match):
             print("[bold red][Error][/bold red] Unable to fetch commentary!")
 
     def squad(self):
-        pass
+        t0 = self.data.get("team")[0].get("player")
+        t1 = self.data.get("team")[1].get("player")
+        t0_name = self.data.get("team")[0].get("team_name")
+        t1_name = self.data.get("team")[1].get("team_name")
+        sq0 = []
+        sq1 = []
+        info = []
+        for player in t0:
+            name = player.get("known_as")
+            if player.get("captain") == 1:
+                name += " (c)"
+            if player.get("keeper") == 1:
+                name += " (wk)"
+            sq0.append(name)
+        for player in t1:
+            name = player.get("known_as")
+            if player.get("captain") == 1:
+                name += " (c)"
+            if player.get("keeper") == 1:
+                name += " (wk)"
+            sq1.append(name)
+
+        info = zip(sq0, sq1)
+        header = [t0_name, t1_name]
+        print(tabulate(info, headers=header, tablefmt="simple_grid"))
 
     def tweets(self):
         pass
@@ -298,6 +319,15 @@ def get_commentary(id=None, limit=2, notify=None):
     """
     sb = Scoreboard(id)
     sb.commentary(int(limit))
+
+
+@app.command("squad")
+def squad(id=None):
+    """
+    Fetch players for each team in the match.
+    """
+    sb = Scoreboard(id)
+    sb.squad()
 
 
 if __name__ == "__main__":
