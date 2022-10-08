@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cricnotifier"
-version = "0.1.0"
+version = "2.0.3"
 description = "A cli application for real time cricket match notifications."
 authors = ["Jeet Jain <jeet88833@gmail.com>"]
 readme = "README.md"
