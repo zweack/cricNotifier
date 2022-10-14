@@ -121,7 +121,7 @@ $ cricnotifier list
 
 Use select command to select a match.
 e.g. for Bengal v Odisha, use
-cric select 37
+cricnotifier select 37
 ```
 
 Too many matches? Filter them using `--filter`
@@ -133,7 +133,7 @@ $ cricnotifier list --filter aus
 
 Use select command to select a match.
 e.g. for Australia v England , use
-cric select 1
+cricnotifier select 1
 ```
 
 #### Select a match using ID
@@ -235,14 +235,15 @@ $ cricnotifier commentary --id 32
 Good length, top of off, he defends to the right of cover and pinches a single.
 
 [3.1]: Hazlewood to Buttler, FOUR
-Lofted inside out over cover! Superb shot. Not a half volley, he opened up the chest and sliced it over cover with great timing.
+Lofted inside out over cover! Superb shot. Not a half volley, he opened up the chest and sliced 
+it over cover with great timing.
 
 [2.6]: Cummins to Malan, NO RUN
 135kph, he plays and misses trying to glide one with the angle to third man.
 
 [2.5]: Cummins to Malan, FOUR
-Pulled over midwicket! A bouncer that got high outside off but he was equal to it, high hands and he pulled with ease over the
-infield.
+Pulled over midwicket! A bouncer that got high outside off but he was equal to it, high hands 
+and he pulled with ease over the infield.
 
 [2.4]: Cummins to Malan, NO RUN
 136kph, short and wide, he cracks a cut with outstanding timing straight to Maxwell at point.
@@ -251,16 +252,19 @@ infield.
 136kph, good length top of off, he defends from the crease.
 
 [2.2]: Cummins to Malan, FOUR
-Pinged off the pads! Half volley on middle, no swing and Malan clips this beautifully through midwicket. Wonderful timing.
+Pinged off the pads! Half volley on middle, no swing and Malan clips this beautifully through 
+midwicket. Wonderful timing.
 
 [2.1]: Cummins to Buttler, 1 RUN
-131kph, back of a length, nipping back, thick inside edge onto pad and it balloons into the leg side safely for one.
+131kph, back of a length, nipping back, thick inside edge onto pad and it balloons into the leg 
+side safely for one.
 
 [1.6]: Hazlewood to Buttler, 1 RUN
 138kph, fuller length, angled into off, he defends pushing it to mid off and runs with the shot.
 
 [1.5]: Hazlewood to Buttler, NO RUN
-138kph, good length, angled into off, he defends getting a thickish inside edge to mid on, they look at a single but Buttler sends
+138kph, good length, angled into off, he defends getting a thickish inside edge to mid on, they 
+look at a single but Buttler sends
 him back.
 
 [1.4]: Hazlewood to Buttler, NO RUN
@@ -270,8 +274,9 @@ him back.
 143kph, good length, he defends firmly straight of mid off for a single.
 
 [1.2]: Hazlewood to Hales, OUT
-Nicked straight to slip! A beauty! Back of a length angled into middle, it leaves him as he's caught on the crease defending, gets
-a thick edge and it floats waist high to Finch who pouches it. Test match dismissal that. Amazing length and some late movement..
+Nicked straight to slip! A beauty! Back of a length angled into middle, it leaves him as he's 
+caught on the crease defending, gets a thick edge and it floats waist high to Finch who pouches 
+it. Test match dismissal that. Amazing length and some late movement..
 
 [1.1]: Hazlewood to Hales, NO RUN
 136kph, good length, fifth stump channel, he leaves watchfully as it shapes away.
