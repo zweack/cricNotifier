@@ -38,33 +38,244 @@ select            Select a match with an ID.
 ````
 
 ## Examples
-### Get list of currently available matches
+#### Get list of currently available matches
 
-![image](https://user-images.githubusercontent.com/15276039/194712651-3bcb3358-53b2-445c-8b3f-e59e072611b4.png)
+```
+$ cricnotifier list
+┌────┬─────────────────────────────────────────────────────────────────────────┐
+│  1 │ New Zealand v Pakistan                                                  │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│  2 │ Madhya Pradesh v Uttarakhand                                            │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│  3 │ Punjab v Tripura                                                        │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│  4 │ Karnataka v Meghalaya                                                   │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│  5 │ Nepal Police Club Women v Lumbini Province Women                        │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│  6 │ Sydney Thunder Women v Hobart Hurricanes Women                          │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│  7 │ BandeAmir Region v Speen Ghar Region                                    │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│  8 │ Boost Region v Mis Ainak Region                                         │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│  9 │ Burgher Recreation Club v Sebastianites Cricket and Athletic Club       │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 10 │ Galle Cricket Club v Moors Sports Club                                  │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 11 │ Kalutara Town Club v Ragama Cricket Club                                │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 12 │ Kandy Customs Cricket Club v Sinhalese Sports Club                      │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 13 │ Kurunegala Youth Cricket Club v Colts Cricket Club                      │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 14 │ Police Sports Club v Lankan Cricket Club                                │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 15 │ Ace Capital Cricket Club v Badureliya Sports Club                       │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 16 │ Bloomfield Cricket and Athletic Club v Tamil Union Cricket and Athletic │
+│    │ Club                                                                    │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 17 │ Chilaw Marians Cricket Club v Sri Lanka Air Force Sports Club           │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 18 │ Negombo Cricket Club v Panadura Sports Club                             │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 19 │ Saracens Sports Club v Nugegoda Sports Welfare Club                     │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 20 │ Sri Lanka Navy Sports Club v Sri Lanka Army Sports Club                 │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 21 │ Assam v Mumbai                                                          │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 22 │ Delhi v Uttar Pradesh                                                   │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 23 │ Haryana v Kerala                                                        │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 24 │ Bihar v Himachal Pradesh                                                │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 25 │ Nagaland v Saurashtra                                                   │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 26 │ Chandigarh v Jharkhand                                                  │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 27 │ Sikkim v Tamil Nadu                                                     │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 28 │ Karnali Province Women v Province Number Women                          │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 29 │ Mizoram v Vidarbha                                                      │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 30 │ Manipur v Puducherry                                                    │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 31 │ Arunachal Pradesh v Services                                            │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 32 │ Australia v England                                                     │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 33 │ Railways v Rajasthan                                                    │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 34 │ Goa v Hyderabad India                                                   │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 35 │ Jammu Kashmir v Maharashtra                                             │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 36 │ Baroda v Gujarat                                                        │
+├────┼─────────────────────────────────────────────────────────────────────────┤
+│ 37 │ Bengal v Odisha                                                         │
+└────┴─────────────────────────────────────────────────────────────────────────┘
 
-### Select a match using ID
+Use select command to select a match.
+e.g. for Bengal v Odisha, use
+cric select 37
+```
 
-![image](https://user-images.githubusercontent.com/15276039/194712851-5c77d88a-ac4d-48d6-9d7e-07940074cb26.png)
+Too many matches? Filter them using `--filter`
+```
+$ cricnotifier list --filter aus
+┌───┬─────────────────────┐
+│ 1 │ Australia v England │
+└───┴─────────────────────┘
 
-### Get info about selected match
+Use select command to select a match.
+e.g. for Australia v England , use
+cric select 1
+```
 
-![image](https://user-images.githubusercontent.com/15276039/194713000-6c258b95-f044-42a4-9934-6b044e4b1cbf.png)
+#### Select a match using ID
+This will cache ID of the match so that you dont have to provide match ID with every command.
+Alternatively you can always pass `--id` with any command which will have higher precedence.   
 
-Alternatively you can pass an ID which will override the preserved ID using select (for current command only).
+```
+$ cricnotifier select 32
+[Info] You have selected: Australia vs England
+```
 
-![image](https://user-images.githubusercontent.com/15276039/194713095-e7b9aebd-d65f-4a71-9e6e-6b44ddde8dfb.png)
+#### Get info about selected match
+```
+$ cricnotifier info
+┌─────────────┬─────────────────────────────────────────────────────────────┐
+│ Description │ England tour of Australia, 3rd T20I: Australia v England at │
+│             │ Canberra, Oct 14, 2022                                      │
+├─────────────┼─────────────────────────────────────────────────────────────┤
+│ Series      │ England in Australia T20I Series                            │
+├─────────────┼─────────────────────────────────────────────────────────────┤
+│ Venue       │ Manuka Oval, Canberra                                       │
+├─────────────┼─────────────────────────────────────────────────────────────┤
+│ Summary     │ England 43/1 (5.2 ov, DJ Malan 16*, JC Buttler 20*, PJ      │
+│             │ Cummins 0/14)                                               │
+├─────────────┼─────────────────────────────────────────────────────────────┤
+│ Toss        │ Australia won the toss and choose to field first.           │
+└─────────────┴─────────────────────────────────────────────────────────────┘
+```
 
-### Get squads for the match
+Alternatively you can pass an ID which will override the preserved ID using select command.
+```
+$ cricnotifier info --id 28
+┌─────────────┬──────────────────────────────────────────────────────────────┐
+│ Description │ CAN National Women's Cricket Tournament, 12th Match, Group   │
+│             │ B: Karnali Province Women v Province Number 1 Women at       │
+│             │ Pokhara, Oct 14, 2022                                        │
+├─────────────┼──────────────────────────────────────────────────────────────┤
+│ Series      │ CAN National Women's Cricket Tournament                      │
+├─────────────┼──────────────────────────────────────────────────────────────┤
+│ Venue       │ Pokhara Rangasala                                            │
+├─────────────┼──────────────────────────────────────────────────────────────┤
+│ Summary     │ Karnali Province Women 53 (16.1 ov, AT Chetri 0*, A Khadiya  │
+│             │ 3/6) - Innings break                                         │
+├─────────────┼──────────────────────────────────────────────────────────────┤
+│ Toss        │ Karnali Province Women won the toss and choose to bat first. │
+└─────────────┴──────────────────────────────────────────────────────────────┘
+```
 
-![image](https://user-images.githubusercontent.com/15276039/194713131-393c6651-d3e6-46e7-9fac-9c60ea70bcbf.png)
+#### Get squads for the match
 
-### Get latest score
+```
+$ cricnotifier squad
+┌───────────────────┬──────────────────────┐
+│ Australia         │ England              │
+├───────────────────┼──────────────────────┤
+│ Aaron Finch (c)   │ Jos Buttler (c) (wk) │
+├───────────────────┼──────────────────────┤
+│ Steven Smith      │ Alex Hales           │
+├───────────────────┼──────────────────────┤
+│ Mitchell Marsh    │ Dawid Malan          │
+├───────────────────┼──────────────────────┤
+│ Glenn Maxwell     │ Ben Stokes           │
+├───────────────────┼──────────────────────┤
+│ Marcus Stoinis    │ Harry Brook          │
+├───────────────────┼──────────────────────┤
+│ Tim David         │ Moeen Ali            │
+├───────────────────┼──────────────────────┤
+│ Matthew Wade (wk) │ Chris Woakes         │
+├───────────────────┼──────────────────────┤
+│ Pat Cummins       │ David Willey         │
+├───────────────────┼──────────────────────┤
+│ Mitchell Starc    │ Adil Rashid          │
+├───────────────────┼──────────────────────┤
+│ Adam Zampa        │ Mark Wood            │
+├───────────────────┼──────────────────────┤
+│ Josh Hazlewood    │ Reece Topley         │
+└───────────────────┴──────────────────────┘
+```
 
-![image](https://user-images.githubusercontent.com/15276039/194713334-3894e4b1-e64c-45e0-82f3-540cde082e59.png)
+#### Get latest score
+
+```
+$ cricnotifier score --id 32
+┌─────────────────────────────────────────────┐
+│ England vs Australia                        │
+├─────────────────────────────────────────────┤
+│ England: 26/1                               │
+│ Overs: 3.5                                  │
+│ Dawid Malan 10(8)* Jos Buttler 10(13)       │
+│ Australia won the toss and elected to field │
+└─────────────────────────────────────────────┘
+```
 
 ### Get text commentary of the match
 
-![image](https://user-images.githubusercontent.com/15276039/194713428-1ac34fc1-1334-4662-82ea-91fb2b1bd04d.png)
+```
+$ cricnotifier commentary --id 32
+[3.2]: Hazlewood to Buttler, 1 RUN
+Good length, top of off, he defends to the right of cover and pinches a single.
+
+[3.1]: Hazlewood to Buttler, FOUR
+Lofted inside out over cover! Superb shot. Not a half volley, he opened up the chest and sliced it over cover with great timing.
+
+[2.6]: Cummins to Malan, NO RUN
+135kph, he plays and misses trying to glide one with the angle to third man.
+
+[2.5]: Cummins to Malan, FOUR
+Pulled over midwicket! A bouncer that got high outside off but he was equal to it, high hands and he pulled with ease over the
+infield.
+
+[2.4]: Cummins to Malan, NO RUN
+136kph, short and wide, he cracks a cut with outstanding timing straight to Maxwell at point.
+
+[2.3]: Cummins to Malan, NO RUN
+136kph, good length top of off, he defends from the crease.
+
+[2.2]: Cummins to Malan, FOUR
+Pinged off the pads! Half volley on middle, no swing and Malan clips this beautifully through midwicket. Wonderful timing.
+
+[2.1]: Cummins to Buttler, 1 RUN
+131kph, back of a length, nipping back, thick inside edge onto pad and it balloons into the leg side safely for one.
+
+[1.6]: Hazlewood to Buttler, 1 RUN
+138kph, fuller length, angled into off, he defends pushing it to mid off and runs with the shot.
+
+[1.5]: Hazlewood to Buttler, NO RUN
+138kph, good length, angled into off, he defends getting a thickish inside edge to mid on, they look at a single but Buttler sends
+him back.
+
+[1.4]: Hazlewood to Buttler, NO RUN
+137kph, good length top of off, he defends from the crease.
+
+[1.3]: Hazlewood to Malan, 1 RUN
+143kph, good length, he defends firmly straight of mid off for a single.
+
+[1.2]: Hazlewood to Hales, OUT
+Nicked straight to slip! A beauty! Back of a length angled into middle, it leaves him as he's caught on the crease defending, gets
+a thick edge and it floats waist high to Finch who pouches it. Test match dismissal that. Amazing length and some late movement..
+
+[1.1]: Hazlewood to Hales, NO RUN
+136kph, good length, fifth stump channel, he leaves watchfully as it shapes away.
+```
 
 
 ## Contributing
