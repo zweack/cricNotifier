@@ -4,6 +4,7 @@ import json
 import typer
 import requests
 from rich import print
+from time import sleep
 from tabulate import tabulate
 from bs4 import BeautifulSoup
 from plyer import notification
@@ -40,8 +41,8 @@ class Store:
 class Notification:
     def __init__(self) -> None:
         self.name = "cricNotifier"
-        self.icon = os.path.join(os.getcwd(), 'cricNotifier',
-                                 'static', 'icon', 'cricNotifier' + '.' + 'ico' if os.name == "nt" else 'png')
+        self.icon = os.path.join(os.getcwd(), self.name,
+                                 'static', 'icon', self.name + '.' + 'ico' if os.name == "nt" else 'png')
 
     def send(self, header, message, duration):
         try:
@@ -198,6 +199,7 @@ class Scoreboard(Match):
 
         info = [[status_str], [score_str]]
         print(tabulate(info, tablefmt="simple_grid"))
+        return status_str, score_str
 
     def commentary(self, limit):
         count = 0
@@ -291,16 +293,23 @@ def select_match(id):
 
 
 @app.command("score")
-def get_score(id=None, notify=None):
+def get_score(id=None, notify=None, interval=20):
     """
     Fetch latest score for a match.
     """
-    status = ""
-    sb = Scoreboard(id)
-    sb.score()
-    if notify:
-        n = Notification()
-        n.send("Some Match", status, 10)
+    while True:
+        try:
+            sb = Scoreboard(id)
+            status, score = sb.score()
+            if notify is None:
+                break
+            else:
+                n = Notification()
+                n.send(status, score, 10)
+                sleep(int(interval))
+        except KeyboardInterrupt:
+            print("Keyboard interruption detected.")
+            exit(0)
 
 
 @app.command("info")
