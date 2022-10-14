@@ -30,11 +30,12 @@ cricNotifier [argument]
 ```
 Arguments:
 ```
-commentary        Fetch commentary for last few overs.
-info              Fetch info for a match.
 list              List all available matches.
-score             Fetch latest score for a match.
 select            Select a match with an ID.
+info              Fetch info for a match.
+squad             Fetch players for each team in the match.
+score             Fetch latest score for a match.
+commentary        Fetch commentary for last few overs.
 ````
 
 ## Examples
