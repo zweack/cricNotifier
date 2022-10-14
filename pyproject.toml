@@ -9,7 +9,7 @@ readme = "README.md"
 cricnotifier = "cricnotifier.main:app"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.5"
 typer = {extras = ["all"], version = "^0.6.1"}
 requests = "*"
 pytest = "*"
