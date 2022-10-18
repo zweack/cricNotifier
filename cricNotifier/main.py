@@ -14,8 +14,8 @@ class Store:
     def __init__(self) -> None:
         if os.name == "nt":
             self.store = os.getenv('APPDATA') + "\\cricNotifier\\"
-        elif os.name == 'linux':
-            self.store = "/usr/local/share/cricNotifier/"
+        elif os.name == 'posix':
+            self.store = "/var/tmp/cricNotifier/"
 
     def get(self):
         if (self.store):
@@ -41,8 +41,8 @@ class Store:
 class Notification:
     def __init__(self) -> None:
         self.name = "cricNotifier"
-        self.icon = os.path.join(os.getcwd(), self.name,
-                                 'static', 'icon', self.name + '.' + 'ico' if os.name == "nt" else 'png')
+        self.icon = os.path.join(os.getcwd(), 'cricNotifier',
+                                 'static', 'icon', 'cricNotifier' + '.' + 'ico' if os.name == "nt" else 'png')
 
     def send(self, header, message, duration):
         try:
@@ -75,10 +75,18 @@ class Match:
 
     def list(self, f):
         """Get list of live matches in past 24 hours."""
-        matches = list(map(lambda item: re.sub(
-            r'\s+', " ", re.sub('[^A-Za-z ]+', '', item.title.text)), self.xml))
-        if f is not None:
-            matches = list(filter(lambda x: f.upper() in x.upper(), matches))
+        matches = []
+        try:
+            matches = list(map(lambda item: re.sub(
+                r'\s+', " ", re.sub('[^A-Za-z ]+', '', item.title.text)), self.xml))
+            matches = [[i+1, match] for i, match in enumerate(matches)]
+
+            if f is not None:
+                matches = list(filter(lambda x: f.upper()
+                                      in x[1].upper(), matches))
+        except Exception:
+            print("[bold red][Error][/bold red] Failed to get available matches!")
+            exit(0)
         return matches
 
 
@@ -262,14 +270,11 @@ def list_matches(filter=None):
     """
     m = Match()
     matches = m.list(filter)
-    options = []
     if len(matches) != 0:
-        for i, match in enumerate(matches):
-            options.append([i + 1, match])
-        print(tabulate(options, tablefmt="simple_grid", maxcolwidths=[6, 72]))
+        print(tabulate(matches, tablefmt="simple_grid", maxcolwidths=[6, 72]))
         print("\nUse select command to select a match.")
-        print("e.g. for {}, use \ncric select {} ".format(
-            matches[-1], len(matches)))
+        print("e.g. for {}, use \ncricnotifier select {} ".format(
+            matches[-1][1], matches[-1][0]))
 
 
 @app.command("select")
