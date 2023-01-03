@@ -40,7 +40,7 @@ class Store:
 
 class Notification:
     def __init__(self) -> None:
-        self.name = "cricNotifier"
+        self.name = 'cricNotifier'
         self.icon = os.path.join(os.getcwd(), 'cricNotifier',
                                  'static', 'icon', 'cricNotifier' + '.' + 'ico' if os.name == "nt" else 'png')
 
@@ -313,7 +313,7 @@ def get_score(id=None, notify=None, interval=20):
                 n.send(status, score, 10)
                 sleep(int(interval))
         except KeyboardInterrupt:
-            print("Keyboard interruption detected.")
+            print("[green][Info][/green] Keyboard interruption detected.")
             exit(0)
 
 
