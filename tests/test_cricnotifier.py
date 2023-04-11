@@ -3,7 +3,7 @@ import json
 import pytest
 from unittest import mock
 from typer.testing import CliRunner
-from cric_notifier import Store, Notification, Match, Scoreboard
+from cricnotifier import Store, Notification, Match, Scoreboard
 
 
 @pytest.fixture(scope='module')
